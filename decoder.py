@@ -127,11 +127,13 @@ def idwt(filtered_image, quantization_Array):
     HighPass2_rows = np.zeros(
         (filtered_image[0].shape[0]*2, filtered_image[0].shape[1]))
     HighPass2_rows[::2, :] = filtered_image[3]
+
     for i in range(0, LowPass1_rows.shape[1]):
         LowPass1_rows[:, i] = lfilter(LPF, 1.0, LowPass1_rows[:, i])
         LowPass2_rows[:, i] = lfilter(HPF, 1.0, LowPass2_rows[:, i])
         HighPass1_rows[:, i] = lfilter(LPF, 1.0, HighPass1_rows[:, i])
         HighPass2_rows[:, i] = lfilter(HPF, 1.0, HighPass2_rows[:, i])
+
     LowPass_temp = LowPass1_rows+LowPass2_rows
     LowPass_rows = np.zeros(
         (filtered_image[0].shape[0]*2, filtered_image[0].shape[1]*2))
@@ -140,7 +142,8 @@ def idwt(filtered_image, quantization_Array):
     HighPass_rows = np.zeros(
         (filtered_image[0].shape[0]*2, filtered_image[0].shape[1]*2))
     HighPass_rows[:, ::2] = HighPass_temp
-    print(LowPass_rows.shape)
+    #print(LowPass_rows.shape)
+
     for i in range(0, LowPass_rows.shape[0]):
         HighPass_rows[i, :] = lfilter(HPF, 1.0, HighPass_rows[i, :])
         LowPass_rows[i, :] = lfilter(LPF, 1.0, LowPass_rows[i, :])

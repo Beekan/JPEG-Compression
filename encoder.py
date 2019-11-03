@@ -201,7 +201,7 @@ def dwt(image_array, quantization_Array):
     # downsampling by 2 on both rows and columns
     for i in range(0, len(filtered_image)):
         filtered_image[i] = filtered_image[i][0:filtered_image[i].shape[0]:2,0:filtered_image[i].shape[1]:2]
-        filtered_image[i] = filtered_image[i]/quantization_Array[i]
+        filtered_image[i] = round(filtered_image[i]/quantization_Array[i])
 
     return filtered_image
 
